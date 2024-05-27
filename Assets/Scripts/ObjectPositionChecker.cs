@@ -8,7 +8,8 @@ public class ObjectPositionChecker : MonoBehaviour
     public GameObject maçaneta;
     public GameObject  ordemCorreta;
     public GameObject ordemIncorreta;
-
+    public AudioSource ordemOutcorreta;
+    public AudioSource ordemOutIncorreta;
     private void Start()
     {
         if (doorOpen == null)
@@ -34,6 +35,7 @@ public class ObjectPositionChecker : MonoBehaviour
         {
             objectInPlace = false;
             ordemIncorreta.SetActive(true);
+            ordemOutIncorreta.Play();
         }
     }
 
@@ -60,6 +62,7 @@ public class ObjectPositionChecker : MonoBehaviour
     {
         Debug.Log("All objects are in place. Open the door!");
         ordemCorreta.SetActive(true);
+        ordemOutcorreta.Play(); 
         // Código para abrir a porta
         // DoorController.Instance.OpenDoor();
         maçaneta.SetActive(true);
