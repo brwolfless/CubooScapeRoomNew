@@ -9,6 +9,7 @@ public class OpenDoor : MonoBehaviour
     public Animator animator;
     public FadeScreen FadeScreen;
     public int sceneIndex;
+    public AudioSource SoundFX;
 
     // Método chamado quando outro objeto entra no trigger
     private void OnTriggerEnter(Collider other)
@@ -16,7 +17,7 @@ public class OpenDoor : MonoBehaviour
         // Verifica se o objeto que colidiu tem a tag "Player" (ou qualquer outra tag que você desejar)
         if (other.CompareTag("Player"))
         {
-            
+            SoundFX.Play();
             // Ativa o booleano no Animator
             animator.SetBool("open", true);
             StartCoroutine(GoToSceneRoutine(sceneIndex));

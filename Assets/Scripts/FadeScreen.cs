@@ -9,6 +9,7 @@ public class FadeScreen : MonoBehaviour
     public Color fadeColor;
     private Renderer Renderer;
    
+
     void Start()
     {
         Renderer = GetComponent<Renderer>();
@@ -27,7 +28,8 @@ public class FadeScreen : MonoBehaviour
     }
     public void FadeOut()
     {
-        Fade(0,1);
+         
+         Fade(0,1);
     }
     public IEnumerator FadeRoutine(float alphaIn, float alphaOut)
     {
