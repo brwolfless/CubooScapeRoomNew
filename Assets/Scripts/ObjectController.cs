@@ -42,6 +42,7 @@ public class ObjectController : MonoBehaviour
     public GameObject thisCanvas;
     public GameObject endCanvas;
     public Animator endAnim;
+    public AudioSource sfx;
     //public bool testBool;
 
     public void Start()
@@ -94,6 +95,7 @@ public class ObjectController : MonoBehaviour
                         Player.transform.position = teleportLocation.position;
                         timeLookedAt = 0;
                         slider.sliderValue = 0;
+                        sfx.Play();
                         if (isEnd)
                         {
                             for (int i = 0; i < pontos.Length; i++)
@@ -108,6 +110,7 @@ public class ObjectController : MonoBehaviour
                         timeLookedAt = 0;
                         slider.sliderValue = 0;
                         objToTurnOn.SetActive(true);
+                        sfx.Play();
                     }
                     else if (Acao == Funcao.Teclar)
                     {
@@ -133,7 +136,9 @@ public class ObjectController : MonoBehaviour
                         }
                         ServerEvents.OnSendExplorer.Invoke();
 
-                        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToGo);
+                        sfx.Play();
+                        Invoke("changeScene", 0.15f);
+                        //UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToGo);
                     }
                     else if (Acao == Funcao.AcharDiscurso)
                     {
@@ -143,6 +148,7 @@ public class ObjectController : MonoBehaviour
                         Explorer.ExploradorObject.eventName = Server.EventNames.DocumentDownloaded;
                         Explorer.ExploradorObject.message = "3";
                         ServerEvents.OnSendExplorer.Invoke();
+                        sfx.Play();
                     }
                     else if (Acao == Funcao.CallBifrostEscritorio)
                     {
@@ -152,6 +158,7 @@ public class ObjectController : MonoBehaviour
                         Explorer.ExploradorObject.eventName = Server.EventNames.AskingForBifrost;
                         Explorer.ExploradorObject.message = "escritorio";
                         ServerEvents.OnSendExplorer.Invoke();
+                        sfx.Play();
                     }
                     else if (Acao == Funcao.CallBifrostPraia)
                     {
@@ -161,6 +168,7 @@ public class ObjectController : MonoBehaviour
                         Explorer.ExploradorObject.eventName = Server.EventNames.AskingForBifrost;
                         Explorer.ExploradorObject.message = "praia";
                         ServerEvents.OnSendExplorer.Invoke();
+                        sfx.Play();
                     }
                     else if (Acao == Funcao.Animacao)
                     {
@@ -168,6 +176,7 @@ public class ObjectController : MonoBehaviour
                         slider.sliderValue = 0;
                         GetComponent<Animator>().SetTrigger("Open");
                         this.enabled = false;
+                        sfx.Play();
                     }
                     else if (Acao == Funcao.EndGame)
                     {
@@ -215,5 +224,10 @@ public class ObjectController : MonoBehaviour
         Explorer.ExploradorObject.message = "end";
         ServerEvents.OnSendExplorer.Invoke();
         SceneManager.LoadScene("GDTStart");
+    }
+
+    void changeScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToGo);
     }
 }

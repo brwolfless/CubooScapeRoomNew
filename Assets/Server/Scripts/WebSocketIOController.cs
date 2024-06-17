@@ -42,6 +42,8 @@ public class WebSocketIOController : MonoBehaviour
     public static WebSocketIOController Instance;
     private bool _isOpen;
 
+    private bool _isConnecting;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -60,8 +62,11 @@ public class WebSocketIOController : MonoBehaviour
     {
         return _isOpen;
     }
-    
 
+    public string GetURI()
+    {
+        return _uri.ToString();
+    }
     public void SetURI(Uri uri)
     {
         _uri = uri;
@@ -77,14 +82,23 @@ public class WebSocketIOController : MonoBehaviour
 
         if (_socketManager == null)
         {
+            _isConnecting = true;
             SocketOptions socketOptions = new SocketOptions();
             _socketManager = new SocketManager(_uri);
             _socketManager.Socket.On<ConnectResponse>(SocketIOEventTypes.Connect, OnConnect);
             _socketManager.Socket.On<Error>(SocketIOEventTypes.Error, OnError);
             _socketManager.OnIncomingPacket += OnIncomingPacketHandler;
             _socketManager.Open();
+            return;
         }
-        
+
+        if (_isConnecting)
+        {
+            _isConnecting = false;
+            _socketManager.Close();
+            _socketManager = null;
+            ConnectToServer();
+        }
     }
     void Start()
     {

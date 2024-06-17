@@ -9,6 +9,7 @@ public class TriggerEndgame : MonoBehaviour
     public GameObject[] endgamescreens;
     public float timeToEnd;
     public float timeToChangeScene;
+    public AudioSource winsfx;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +27,7 @@ public class TriggerEndgame : MonoBehaviour
         {
             endgamescreens[i].SetActive(true);
         }
+        winsfx.Play();
     }
 
     void ChangeScene()

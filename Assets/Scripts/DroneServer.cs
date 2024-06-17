@@ -12,6 +12,7 @@ public class DroneServer : MonoBehaviour
 { 
     public ObjectController objectController;
     public GameObject Saida;
+    public AudioSource notification;
 
     private void OnEnable()
     {
@@ -37,11 +38,13 @@ public class DroneServer : MonoBehaviour
             {
                 objectController.sceneToGo = "Escritorio";
                 Saida.SetActive(true);
+                notification.Play();
             }
             else if(pilotao.pilotEvent.message == "praia")
             {
                 objectController.sceneToGo = "Praia";
                 Saida.SetActive(true);
+                notification.Play();
             }
         }
     }

@@ -7,11 +7,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EscritorioServer : MonoBehaviour
+public class PraiaServer : MonoBehaviour
 {
     [SerializeField] GameObject AskingBifrost;
     [SerializeField] GameObject BifrostArrived;
-    [SerializeField] GameObject Player;
     public AudioSource notification;
 
     private void OnEnable()
@@ -26,7 +25,7 @@ public class EscritorioServer : MonoBehaviour
 
     void OnReceivedPilot(ReceivedPiloto pilotao)
     {
-        if (pilotao.pilotEvent.eventName == Server.EventNames.BiforstActivated && Player.transform.position.z < -7.186f)
+        if (pilotao.pilotEvent.eventName == Server.EventNames.BiforstActivated)
         {
             AskingBifrost.SetActive(false);
             BifrostArrived.SetActive(true);

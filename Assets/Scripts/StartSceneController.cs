@@ -59,6 +59,7 @@ public class StartSceneController : MonoBehaviour
     public void InputIP(string ip)
     {
         uri = new System.Uri(ip);
+        WebSocketIOController.Instance.SetURI(uri);
     }
 
     /// <summary>
