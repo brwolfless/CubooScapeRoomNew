@@ -1,0 +1,22 @@
+{
+  "GameId": "",
+  "Position": {
+    "x": 20.5,
+    "y": 20
+  },
+  "LocalType": 0,
+  "Event": "",
+  "Message": ""
+}
+{
+  "pilotEvent": {
+    "GameId": "",
+    "Position": {
+      "x": 20.5,
+      "y": 20
+    },
+    "LocalType": 0,
+    "Event": "",
+    "Message": ""
+  }
+}
